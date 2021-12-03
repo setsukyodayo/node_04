@@ -22,8 +22,19 @@ router.get('/', (req, res) => {
     res.render("index.ejs",data) 
 })
 
-router.get('/profile', (req, res) => {
-    res.render('mypage.ejs')
+router.get('/xv', (req, res) => {
+    let user={
+        name:"名前",
+        birthplace:"相模原市",
+        hobby:["ゲーム","ドライブ"]
+
+    }
+    let data={}
+    data.title='プロフィール'
+    data.user=user
+
+    
+    res.render('indexpr.ejs',data)
 })
 router.get('/pr', (req, res) => {
     res.render('login.ejs')
