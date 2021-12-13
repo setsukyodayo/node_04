@@ -16,7 +16,7 @@ router.post('/auth',loginController.auth)
 
 
 
-
+router.get('/item',itemController.index ) 
 router.get('/item/:id',itemController.show ) 
 
 module.exports = router

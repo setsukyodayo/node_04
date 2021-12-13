@@ -6,3 +6,8 @@ exports.show= (req, res) => {
     data.item = item.find(id)
     res.render('item/show.ejs', data)
 }
+exports.index=(req, res) => {
+    let data={}
+    data.item = item.values
+    res.render('item/index.ejs', data)
+}
