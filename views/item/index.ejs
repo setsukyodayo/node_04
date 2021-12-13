@@ -3,8 +3,12 @@
 </div>
 <h1>商品一覧</h1>
 <ul>
-<%item.forEach((item)=>{%>
-   <dd><%=item.name%></dd> 
+    <%item.map((item)=>{%>
+        <dd><a href="/item/<%=item.id%>"> <%=item.name%><a /></dd>
+               
+        <dd>
+            <%=item.price%>円
+        </dd>
         <%})%>
 
-    </ul>
+</ul>
