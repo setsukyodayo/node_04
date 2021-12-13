@@ -4,6 +4,7 @@ const router = express.Router()//書き方決まっている
 // const default_login_name = process.env.LOGIN_NAME
 // const default_passsword = process.env.PASSWORD
 
+const item =require('./models/item')
 router.post('/auth', (req, res) => {
     let message = 'ログインできませんでした。'
     const login_name = req.body.login_name
@@ -42,7 +43,12 @@ router.get('/pr', (req, res) => {
 router.get('/item/:id', (req, res) => {
     const id =req.params.id
     console.log(id)
+    console.log(item)
+    let data={}
     res.render('show.ejs')
+    data.item=item.find(id)
+    res.render('show.ejs',data)
 })
+
 
 module.exports=router
