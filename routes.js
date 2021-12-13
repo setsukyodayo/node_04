@@ -1,54 +1,39 @@
 const express = require('express')
-const router = express.Router()//書き方決まっている
 
-// const default_login_name = process.env.LOGIN_NAME
-// const default_passsword = process.env.PASSWORD
+const homeController = require('./controllers/HomeController')
 
-const item =require('./models/item')
+const item = require('./models/item')
+const router = express.Router()
+
+const default_login_name = process.env.LOGIN_NAME
+const default_passsword = process.env.PASSWORD
+
+//HomeController
+router.get('/', homeController.index)
+router.get('/profile', homeController.profile)
+
+router.get('/login', (req, res) => {
+    res.render('login/index.ejs')
+})
+
 router.post('/auth', (req, res) => {
-    let message = 'ログインできませんでした。'
+    let message = 'ログインできません'
     const login_name = req.body.login_name
-    const passwrod = req.body.passwordi
-    if (login_name == process.env.LOGIN && passwrod == process.env.PASSWORD) {
-        message = 'ログインできました。'
+    const password = req.body.password
+
+    if (login_name == default_login_name
+        && password == default_passsword) {
+        message = 'ログインしました'
     }
     res.send(message)
 })
-// router.post('/index', (req, res) => {
 
-// })
-router.get('/', (req, res) => {
-    let data={}
-    data.title='トップページ'
-    res.render("index.ejs",data) 
-})
-
-router.get('/xv', (req, res) => {
-    let user={
-        name:"名前",
-        birthplace:"相模原市",
-        hobby:["ゲーム","ドライブ"]
-
-    }
-    let data={}
-    data.title='プロフィール'
-    data.user=user
-
-    
-    res.render('indexpr.ejs',data)
-})
-router.get('/pr', (req, res) => {
-    res.render('login.ejs')
-})
 router.get('/item/:id', (req, res) => {
-    const id =req.params.id
+    const id = req.params.id
     console.log(id)
-    console.log(item)
-    let data={}
-    res.render('show.ejs')
-    data.item=item.find(id)
-    res.render('show.ejs',data)
+    let data = {}
+    data.item = item.find(id)
+    res.render('item/show.ejs', data)
 })
 
-
-module.exports=router
+module.exports = router
